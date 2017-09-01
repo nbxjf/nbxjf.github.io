@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="本文包括一下内容：  解决数据依赖，编写健壮的单元测试 处理异常分支和边界场景">
+<meta name="description" content="本文包括一下内容：  如何解决数据依赖，编写健壮的单元测试 如何处理异常分支和边界场景">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编写健壮的单元测试">
 <meta property="og:url" content="http://nbxjf.github.com/2017/08/31/编写健壮的单元测试/index.html">
 <meta property="og:site_name" content="何不梦一场的博客">
-<meta property="og:description" content="本文包括一下内容：  解决数据依赖，编写健壮的单元测试 处理异常分支和边界场景">
+<meta property="og:description" content="本文包括一下内容：  如何解决数据依赖，编写健壮的单元测试 如何处理异常分支和边界场景">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-31T10:49:11.000Z">
+<meta property="og:updated_time" content="2017-09-01T06:36:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编写健壮的单元测试">
-<meta name="twitter:description" content="本文包括一下内容：  解决数据依赖，编写健壮的单元测试 处理异常分支和边界场景">
+<meta name="twitter:description" content="本文包括一下内容：  如何解决数据依赖，编写健壮的单元测试 如何处理异常分支和边界场景">
 
 
 
@@ -347,8 +347,8 @@
       
         <p>本文包括一下内容：</p>
 <ul>
-<li>解决数据依赖，编写健壮的单元测试</li>
-<li>处理异常分支和边界场景</li>
+<li>如何解决数据依赖，编写健壮的单元测试</li>
+<li>如何处理异常分支和边界场景</li>
 </ul>
 <a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一次完整的开发，代码编写其实只占据了很小的一部分，而更多时间，则被花费在了调试上面。在开发过程中，我们经常需要自己编写一套单元测试用例，自测代码的正确性。</p>
@@ -356,7 +356,7 @@
 <ul>
 <li>检测代码正确性，暴露代码中存在的Bug</li>
 <li>快速定位Bug</li>
-<li>暴露边界已异常场景</li>
+<li>暴露边界与异常场景</li>
 <li>快速review代码</li>
 <li>提高代码质量，减少QA时间</li>
 </ul>
@@ -366,7 +366,7 @@
 <li>忽略了异常分支与边界场景</li>
 <li>逻辑分支太多，无法覆盖所有的分支</li>
 </ul>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="数据依赖"><a href="#数据依赖" class="headerlink" title="数据依赖"></a>数据依赖</h3><p>其实编写单元测试，基本避免不了数据依赖的场景，而数据依赖，基本来源与两个方面：</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="数据依赖"><a href="#数据依赖" class="headerlink" title="数据依赖"></a>数据依赖</h3><p>其实编写单元测试，基本避免不了数据依赖的场景，而数据依赖，基本来源于两个方面：</p>
 <ol>
 <li>外部数据</li>
 <li>数据库数据</li>
@@ -374,7 +374,7 @@
 <p>而一个健壮的单元测试，原则上不应该有数据依赖，或者说，不依赖于现有的数据。</p>
 <p>举个例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">AbstractTransactionalJUnit4SpringContextTests</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Mock</span></div><div class="line">    ProductService productService;</div><div class="line">    </div><div class="line">    <span class="meta">@InjectMocks</span></div><div class="line">    ActivityHttpExportServiceImpl activityHttpExportService;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Mock数据</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@BeforeMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</div><div class="line">        MockitoAnnotations.initMocks(<span class="keyword">this</span>);</div><div class="line">        <span class="comment">//setField...</span></div><div class="line">        when(productService.getProductInfo(any())).thenAnswer(invocationOnMock -&gt; &#123;</div><div class="line">            List&lt;ProductInfo&gt; productInfos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">return</span> productInfos;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 初始化数据</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initOrderActivity</span><span class="params">()</span> </span>&#123;</div><div class="line">        OrderActivityDTO orderActivityDTO = <span class="keyword">new</span> OrderActivityDTO();</div><div class="line">        orderActivityDTO.setName(<span class="string">"测试"</span>);</div><div class="line">        <span class="comment">//...</span></div><div class="line">        orderActivityDTOMapper.insert(orderActivityDTO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 测试</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetActivityProductInfo_TC2</span><span class="params">()</span> </span>&#123;</div><div class="line">        initOrderActivity();</div><div class="line">        ActivityProductResponse activityProductInfo = activityHttpExportService.getActivityProductInfo(activityId, <span class="number">0</span>,<span class="number">10</span>);</div><div class="line">        Assert.assertNotNull(activityProductInfo);</div><div class="line">        <span class="comment">// Assert ...</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="对外部数据的依赖"><a href="#对外部数据的依赖" class="headerlink" title="对外部数据的依赖"></a>对外部数据的依赖</h4><p>在有外部数据依赖的程序中，想要完整覆盖这部分测试逻辑，势必要运行调用外部应用接口获取返回值，但是如果真实进行数据访问，又与程序之间产生耦合，与设计思想不符。</p>
+<h4 id="对外部数据的依赖"><a href="#对外部数据的依赖" class="headerlink" title="对外部数据的依赖"></a>对外部数据的依赖</h4><p>在有外部数据依赖的程序中，想要完整覆盖这部分测试逻辑，势必要运行调用外部应用接口获取返回值，但是如果真实进行接口访问，又与程序之间产生耦合，与设计思想不符。</p>
 <p>而设想当外部依赖还未开发完成，亦或者外部依赖的程序有错误，获得了与预期不符的返回值，那么势必对本身代码逻辑产生影响，需要我们花费大量的时间进行排查，影响开发效率。</p>
 <ul>
 <li><p>如何解决依赖：</p>
@@ -388,7 +388,7 @@
 </li>
 </ul>
 <h4 id="对数据库的依赖"><a href="#对数据库的依赖" class="headerlink" title="对数据库的依赖"></a>对数据库的依赖</h4><p>  如果数据涉及到对数据库的CRUD操作，那么应该真实进行CRUD操作么？还是直接用Mock返回操作结果？</p>
-<p>  其实我觉得是应该真实操作数据库的，因为对数据库的CRUD，也是当前单元的逻辑操作的一部分，同样也会出现Bug。但是如果对数据真实CRUD，又产生了对数据库数据进行破坏的可能。</p>
+<p>  其实我觉得是应该真实操作数据库的，因为对数据库的CRUD，也是当前单元的逻辑操作的一部分，同样也会出现Bug。但是如果对真实数据CRUD，又产生了对数据库数据进行破坏的可能。</p>
 <ul>
 <li><p>如何解决：</p>
 <ul>
@@ -450,6 +450,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/Mockito的使用及原理分析/" rel="prev" title="Mockito的使用及原理分析">
+                Mockito的使用及原理分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -527,7 +543,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
