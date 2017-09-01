@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
+<meta name="description" content="本文包含以下内容：  如何使用Mockito写单元测试 Mockito实现原理浅析 动手写一个Mockito Demo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mockito的使用及原理分析">
 <meta property="og:url" content="http://nbxjf.github.com/2017/09/01/Mockito的使用及原理分析/index.html">
 <meta property="og:site_name" content="何不梦一场的博客">
-<meta property="og:description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
+<meta property="og:description" content="本文包含以下内容：  如何使用Mockito写单元测试 Mockito实现原理浅析 动手写一个Mockito Demo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-01T06:33:17.000Z">
+<meta property="og:updated_time" content="2017-09-01T09:12:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mockito的使用及原理分析">
-<meta name="twitter:description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
+<meta name="twitter:description" content="本文包含以下内容：  如何使用Mockito写单元测试 Mockito实现原理浅析 动手写一个Mockito Demo">
 
 
 
@@ -345,7 +345,68 @@
       
 
       
-        
+        <p>本文包含以下内容：</p>
+<ul>
+<li>如何使用Mockito写单元测试</li>
+<li>Mockito实现原理浅析</li>
+<li>动手写一个Mockito Demo</li>
+</ul>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇讲述了如何编写健壮的单元测试，其中解决外部数据依赖的方式就是Mock数据返回，那么具体如何Mock数据呢？其实现机制又是怎样的呢？</p>
+<p>Mock最常用的框架之一是Mockito，以下分析都将基于Mockito展开。</p>
+<h2 id="Mockito"><a href="#Mockito" class="headerlink" title="Mockito"></a>Mockito</h2><p>一次完整的Mock，包括</p>
+<ul>
+<li>设定目标</li>
+<li>设置消费条件</li>
+<li>预期返回结果</li>
+<li>消费并检验返回结果</li>
+</ul>
+<p>我们首先看一个最简单的的例子来看下如何使用Mockito来进行Mock数据返回：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">when(productService.getProductInfo(any())).thenAnswer(invocationOnMock -&gt; &#123;</div><div class="line">            List&lt;ProductInfo&gt; productInfos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">return</span> productInfos;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line"><span class="comment">//...        </span></div><div class="line">List&lt;ProductInfo&gt; productInfos  = productService.getProductInfo(<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>在上述例子中，这些条件是如何对应的呢？</p>
+<ul>
+<li>设定目标 &gt; <code>List&lt;ProductInfo&gt; productInfos</code></li>
+<li>设置消费条件 -&gt; <code>productService.getProductInfo(any())</code></li>
+<li>预期返回结果 -&gt; <code>thenAnswer(...)</code></li>
+<li>消费并检验返回结果 -&gt; <code>productService.getProductInfo(1)</code></li>
+</ul>
+<p>所以不难发现，Mockito主要就是通过Stub打桩，通过方法名加参数来准确的定位测试桩然后返回预期的值</p>
+<h2 id="提出疑问"><a href="#提出疑问" class="headerlink" title="提出疑问"></a>提出疑问</h2><p>我们都知道，Java的程序调用是用堆栈来实现的，那么是不是有这样的疑问：</p>
+<blockquote>
+<p><code>when()</code>消费的应该是<code>productService.getProductInfo()</code>函数的返回值，对其内部实现并不感知的，那么它是如何来准确通过函数名加参数的条件来打桩的呢？</p>
+</blockquote>
+<h2 id="Mockito的实现原理"><a href="#Mockito的实现原理" class="headerlink" title="Mockito的实现原理"></a>Mockito的实现原理</h2><p>首先，我们应该知道，Mock本质上是一个Proxy代理模式的应用。</p>
+<p>Proxy模式，是在对象提供一个proxy对象，所有对真实对象的调用，都先经过proxy对象，然后由proxy对象根据情况，决定相应的处理，它可以直接做一个自己的处理，也可以再调用真实对象对应的方法。</p>
+<p>所以Mockito本质上就是在代理对象调用方法前，用stub的方式设置其返回值，然后在真实调用时，用代理对象返回起预设的返回值。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>查看<code>when()</code>源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">OngoingStubbing&lt;T&gt; <span class="title">when</span><span class="params">(T methodCall)</span> </span>&#123;</div><div class="line">        MockingProgress mockingProgress = mockingProgress();</div><div class="line">        mockingProgress.stubbingStarted();</div><div class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">        OngoingStubbing&lt;T&gt; stubbing = (OngoingStubbing&lt;T&gt;) mockingProgress.pullOngoingStubbing();</div><div class="line">        <span class="keyword">if</span> (stubbing == <span class="keyword">null</span>) &#123;</div><div class="line">            mockingProgress.reset();</div><div class="line">            <span class="keyword">throw</span> missingMethodInvocation();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> stubbing;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>发现所有的methodCall或被转换成OngoingStubbing对象，而OngoingStubbing存储了哪些信息呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">handle</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">     <span class="keyword">if</span> (invocationContainerImpl.hasAnswersForStubbing()) &#123;</div><div class="line">         ...</div><div class="line">    &#125;</div><div class="line">     ...</div><div class="line">     InvocationMatcher invocationMatcher = matchersBinder.bindMatchers(</div><div class="line">            mockingProgress.getArgumentMatcherStorage(),</div><div class="line">           invocation</div><div class="line">    );</div><div class="line">   mockingProgress.validateState();</div><div class="line">    <span class="comment">// if verificationMode is not null then someone is doing verify()</span></div><div class="line">   <span class="keyword">if</span> (verificationMode != <span class="keyword">null</span>) &#123;</div><div class="line">   ...</div><div class="line">      &#125;</div><div class="line">    <span class="comment">// prepare invocation for stubbing   invocationContainerImpl.setInvocationForPotentialStubbing(invocationMatcher);</span></div><div class="line">  OngoingStubbingImpl&lt;T&gt; ongoingStubbing = </div><div class="line">  <span class="keyword">new</span> OngoingStubbingImpl&lt;T&gt;(invocationContainerImpl);</div><div class="line">mockingProgress.reportOngoingStubbing(ongoingStubbing);</div><div class="line">   ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>查看上面这段代码，可以发现方法调用的信息(invocation)对象被用来构造invocationMatcher对象，最终传递给了ongoingStubbing对象。完成了stub信息的保存。</p>
+<p>所以Mockito在构造时，不仅仅保存了方法的返回值，还做了大量处理，保存了stub的调用信息，才能准确定位。</p>
+<p>而查看thenAnswer的代码，发现了这样的Demo:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">answer</span><span class="params">(InvocationOnMock invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">    <span class="keyword">return</span> (Integer) invocation.getArguments()[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么我们就应该可以在answer中拿到invocation的信息啊，于是我尝试了一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">    LinkedList mock = mock(LinkedList.class);</div><div class="line">    when(mock.add(anyString())).thenAnswer(<span class="keyword">new</span> Answer() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">(InvocationOnMock invocation)</span> </span>&#123;</div><div class="line">            Object[] args = invocation.getArguments();</div><div class="line">            Object mock = invocation.getMock();</div><div class="line">            <span class="keyword">return</span> <span class="string">"called with arguments: "</span> + args;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    System.out.println(mock.add(<span class="string">"foo"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发现确实可以在方法中拿到调用函数以及参数信息。</p>
+<p>所以在Mockiton中，在设置条件时，Mockito并不是对内部实现不感知，相反，保存了参数名以及入参信息，最终来构建stub，返回信息。</p>
+<h2 id="自己动手写Mockito-Demo"><a href="#自己动手写Mockito-Demo" class="headerlink" title="自己动手写Mockito Demo"></a>自己动手写Mockito Demo</h2><p>在学习了Mockito实现原理之后，发现其实它本质上就是通过代理 + 反模式打桩实现的。那么可以自己实现一个Mockito么？</p>
+<p>参考相关资料后，发现应该是可行的，并找到类似材料，那么试试吧。</p>
+<h4 id="一：实现-mock"><a href="#一：实现-mock" class="headerlink" title="一：实现 mock"></a>一：实现 mock</h4><p>Mock的实现关键是，实现动态代理，被 mock 的对象只是“假装”调用了该方法，然后返回假的值。</p>
+<p>可以使用cglib来进行动态代理。通过class对象创建该对象的动态代理对象，然后设置该对象的父类与回调即可。并在回调函数中定义拦截器，实现自定义逻辑。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mockito</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 根据class对象创建该对象的代理对象 </span></div><div class="line"><span class="comment">     * 1、设置父类；2、设置回调 </span></div><div class="line"><span class="comment">     * 本质：动态创建了一个class对象的子类 </span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">mock</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</div><div class="line">        enhancer.setSuperclass(clazz);</div><div class="line">        enhancer.setCallback(<span class="keyword">new</span> MockInterceptor());</div><div class="line">        <span class="keyword">return</span> (T)enhancer.create();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MockInterceptor</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args, MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="二：实现-stub"><a href="#二：实现-stub" class="headerlink" title="二：实现 stub"></a>二：实现 stub</h4><p>首先定义一个类，来表示对函数的调用，重写equals()方法，通过函数名 + 参数列表来判断调用是否相同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Invocation</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object mock;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Method method;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object[] arguments;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MethodProxy proxy;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Invocation</span><span class="params">(Object mock, Method method, Object[] args, MethodProxy proxy)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mock = mock;</div><div class="line">        <span class="keyword">this</span>.method = method;</div><div class="line">        <span class="keyword">this</span>.arguments = copyArgs(args);</div><div class="line">        <span class="keyword">this</span>.proxy = proxy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Object[] copyArgs(Object[] args) &#123;</div><div class="line">        Object[] newArgs = <span class="keyword">new</span> Object[args.length];</div><div class="line">        System.arraycopy(args, <span class="number">0</span>, newArgs, <span class="number">0</span>, args.length);</div><div class="line">        <span class="keyword">return</span> newArgs;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span> || !obj.getClass().equals(<span class="keyword">this</span>.getClass())) &#123; <span class="keyword">return</span> <span class="keyword">false</span>; &#125;</div><div class="line">        Invocation other = (Invocation)obj;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.method.equals(other.method) &amp;&amp; <span class="keyword">this</span>.proxy.equals((other).proxy)</div><div class="line">            &amp;&amp; Arrays.deepEquals(arguments, other.arguments);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来，在 MockInterceptor 类中，需要做两个操作。</p>
+<ol>
+<li>为了设置方法的返回值，需要存放对方法的引用（Invocation）</li>
+<li>调用方法时，检查是否已经设置了该方法的返回值（results）。如果设置了，则返回该值。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mockito</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Invocation, Object&gt; results = <span class="keyword">new</span> HashMap&lt;Invocation, Object&gt;();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Invocation lastInvocation;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">mock</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</div><div class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</div><div class="line">        enhancer.setSuperclass(clazz);</div><div class="line">        enhancer.setCallback(<span class="keyword">new</span> MockInterceptor());</div><div class="line">        <span class="keyword">return</span> (T)enhancer.create();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MockInterceptor</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object obj, Method method, Object[] args, MethodProxy proxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">            Invocation invocation = <span class="keyword">new</span> Invocation(proxy, method, args, proxy);</div><div class="line">            lastInvocation = invocation;</div><div class="line">            <span class="keyword">if</span> (results.containsKey(invocation)) &#123;</div><div class="line">                <span class="keyword">return</span> results.get(invocation);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">When&lt;T&gt; <span class="title">when</span><span class="params">(T o)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> When&lt;T&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">When</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">thenReturn</span><span class="params">(T retObj)</span> </span>&#123;</div><div class="line">            results.put(lastInvocation, retObj);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="三：测试"><a href="#三：测试" class="headerlink" title="三：测试"></a>三：测试</h3><p>测试用例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">    Calculate calculate = mock(Calculate.class);</div><div class="line">    when(calculate.add(<span class="number">1</span>, <span class="number">1</span>)).thenReturn(<span class="number">1</span>);</div><div class="line">    Assert.assertEquals(<span class="number">1</span>, calculate.add(<span class="number">1</span>, <span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>Mockito打桩返回的方式有很多，这边主要关注了经常使用的<code>thenAnswer()</code>函数，至于其他<code>thenReturn()</code>、<code>thenThrow()</code>、<code>thenCallRealMethod()</code>、<code>then()</code>函数，基本类似。</p>
+
       
     </div>
     
@@ -431,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -478,6 +548,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mockito"><span class="nav-number">2.</span> <span class="nav-text">Mockito</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提出疑问"><span class="nav-number">3.</span> <span class="nav-text">提出疑问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mockito的实现原理"><span class="nav-number">4.</span> <span class="nav-text">Mockito的实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证"><span class="nav-number">4.0.1.</span> <span class="nav-text">验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己动手写Mockito-Demo"><span class="nav-number">5.</span> <span class="nav-text">自己动手写Mockito Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一：实现-mock"><span class="nav-number">5.0.1.</span> <span class="nav-text">一：实现 mock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二：实现-stub"><span class="nav-number">5.0.2.</span> <span class="nav-text">二：实现 stub</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三：测试"><span class="nav-number">5.1.</span> <span class="nav-text">三：测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
