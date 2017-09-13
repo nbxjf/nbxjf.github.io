@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="何不梦一场的博客">
 <meta property="og:description" content="本文包括以下内容：  jdk 1.8安装 mysql安装及远程访问配置 ftp配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-12T14:40:46.000Z">
+<meta property="og:updated_time" content="2017-09-13T14:50:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux环境配置">
 <meta name="twitter:description" content="本文包括以下内容：  jdk 1.8安装 mysql安装及远程访问配置 ftp配置">
@@ -446,14 +446,13 @@
 <li><p>进入账户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div><div class="line">grant all on *.* to XXX@&apos;%&apos; identified by &apos;XXX&apos;;</div><div class="line">flush privileges;</div><div class="line">exit;</div><div class="line">/etc/init.d/mysql restart</div></pre></td></tr></table></figure>
 </li>
-<li><p>不建议修改root账号，所以新建账号并且设置可访问的库</p>
-</li>
-<li>重启后即可访问</li>
-<li>阿里云不能访问的话，需要再配置安全规则里的入规则，开启3306端口</li>
 </ul>
 </li>
 </ul>
-<h1 id="Ftp"><a href="#Ftp" class="headerlink" title="Ftp"></a>Ftp</h1><ul>
+<pre><code>* 不建议修改root账号，所以新建账号并且设置可访问的库
+* 重启后即可访问
+* 阿里云不能访问的话，需要再配置安全规则里的入规则，开启3306端口
+</code></pre><h1 id="Ftp"><a href="#Ftp" class="headerlink" title="Ftp"></a>Ftp</h1><ul>
 <li><p>安装ftp</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">   apt-get install vsftpd -y</div><div class="line">apt-get install ftp</div></pre></td></tr></table></figure>
 </li>
