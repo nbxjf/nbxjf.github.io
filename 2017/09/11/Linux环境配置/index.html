@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="何不梦一场的博客">
 <meta property="og:description" content="本文包括以下内容：  jdk 1.8安装 mysql安装及远程访问配置 ftp配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-13T14:50:49.000Z">
+<meta property="og:updated_time" content="2017-09-17T14:59:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux环境配置">
 <meta name="twitter:description" content="本文包括以下内容：  jdk 1.8安装 mysql安装及远程访问配置 ftp配置">
@@ -423,12 +423,15 @@
 <ul>
 <li><p>oracle官方未提供jdk镜像地址，默认apt-get是无法安装jdk8的，需要额外设置jdk镜像源</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install software-properties-common</div><div class="line">sudo add-apt-repository ppa:webupd8team/java</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install -y oracle-java8-installer</div><div class="line">sudo apt-get install -y oracle-java8-set-default</div><div class="line">sudo update-alternatives --config java</div></pre></td></tr></table></figure>
+<p>  <br></p>
+</li>
+<li>参考：<ul>
+<li><a href="https://askubuntu.com/questions/593433/error-sudo-add-apt-repository-command-not-found" target="_blank" rel="external">添加Oracle镜像</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get" target="_blank" rel="external">安装</a></li>
+</ul>
 </li>
 </ul>
-<p>参考：</p>
-<pre><code>* [添加Oracle镜像](https://askubuntu.com/questions/593433/error-sudo-add-apt-repository-command-not-found)
-* [安装](https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get)
-</code></pre><h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><ul>
+<h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><ul>
 <li><p>在线安装</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-client</div><div class="line">apt install mysql-client</div><div class="line">apt install libmysqlclient-dev</div></pre></td></tr></table></figure>
 <ul>
@@ -447,12 +450,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div><div class="line">grant all on *.* to XXX@&apos;%&apos; identified by &apos;XXX&apos;;</div><div class="line">flush privileges;</div><div class="line">exit;</div><div class="line">/etc/init.d/mysql restart</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p><br></p>
+<ul>
+<li>其他<ul>
+<li>不建议修改root账号，所以新建账号并且设置可访问的库</li>
+<li>重启后即可访问</li>
+<li>阿里云不能访问的话，需要再配置安全规则里的入规则，开启3306端口</li>
+</ul>
 </li>
 </ul>
-<pre><code>* 不建议修改root账号，所以新建账号并且设置可访问的库
-* 重启后即可访问
-* 阿里云不能访问的话，需要再配置安全规则里的入规则，开启3306端口
-</code></pre><h1 id="Ftp"><a href="#Ftp" class="headerlink" title="Ftp"></a>Ftp</h1><ul>
+</li>
+</ul>
+<h1 id="Ftp"><a href="#Ftp" class="headerlink" title="Ftp"></a>Ftp</h1><ul>
 <li><p>安装ftp</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">   apt-get install vsftpd -y</div><div class="line">apt-get install ftp</div></pre></td></tr></table></figure>
 </li>
