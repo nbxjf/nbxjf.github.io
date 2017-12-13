@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Redis,分布式锁," />
 
 
 
@@ -88,16 +88,18 @@
 
 
 
-<meta name="description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="何不梦一场的博客">
-<meta property="og:url" content="http://nbxjf.github.com/index.html">
+<meta name="description" content="本文包含以下内容：  基于Redis实现分布式锁">
+<meta name="keywords" content="Redis,分布式锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Redis实现分布式锁">
+<meta property="og:url" content="http://nbxjf.github.com/2017/12/13/基于Redis实现分布式锁/index.html">
 <meta property="og:site_name" content="何不梦一场的博客">
-<meta property="og:description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
+<meta property="og:description" content="本文包含以下内容：  基于Redis实现分布式锁">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-13T08:02:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="何不梦一场的博客">
-<meta name="twitter:description" content="人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！">
+<meta name="twitter:title" content="基于Redis实现分布式锁">
+<meta name="twitter:description" content="本文包含以下内容：  基于Redis实现分布式锁">
 
 
 
@@ -127,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://nbxjf.github.com/"/>
+  <link rel="canonical" href="http://nbxjf.github.com/2017/12/13/基于Redis实现分布式锁/"/>
 
 
 
 
 
-  <title>何不梦一场的博客</title>
+  <title>基于Redis实现分布式锁 | 何不梦一场的博客</title>
   
 
 
@@ -161,8 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -289,9 +290,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -321,9 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/13/基于Redis实现分布式锁/" itemprop="url">基于Redis实现分布式锁</a></h1>
+          <h1 class="post-title" itemprop="name headline">基于Redis实现分布式锁</h1>
         
 
         <div class="post-meta">
@@ -406,19 +405,14 @@
       
 
       
-        
-          <p>本文包含以下内容：</p>
+        <p>本文包含以下内容：</p>
 <ul>
 <li>基于Redis实现分布式锁</li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/13/基于Redis实现分布式锁/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<p>Redis本身是单线程的，所以本身没有锁的概念。<br>所以分布式锁的实现原理是往Redis当中写入一个key(调用方法setnx)，写入成功相当于获取锁成功。写入失败也即是setnx方法返回0，获取锁失败。<br>注意锁的失效时间，否则容易造成死锁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.yit.common.utils.redis;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.yit.annotation.NotThreadSafe;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 使用redis作为分布式锁实现，分布式，不可重入</span></div><div class="line"><span class="comment"> * 不要多线程共享同一个分布式锁，多线程共享同一个分布式锁反而会失去锁"分布式"的特性</span></div><div class="line"><span class="comment"> * 使用示例:</span></div><div class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></div><div class="line"><span class="comment"> *     DefaultJedisLockFactory jedisLockFactory = new DefaultJedisLockFactory("common", "default");</span></div><div class="line"><span class="comment"> *     JedisLock jedisLock = jedisLockFactory.buildLock(1);</span></div><div class="line"><span class="comment"> *     if (jedisLock.tryLock()) &#123;</span></div><div class="line"><span class="comment"> *         try &#123;</span></div><div class="line"><span class="comment"> *              System.out.println("acquire lock success, do something...");</span></div><div class="line"><span class="comment"> *          &#125; finally &#123;</span></div><div class="line"><span class="comment"> *              //锁释放</span></div><div class="line"><span class="comment"> *              jedisLock.release();</span></div><div class="line"><span class="comment"> *          &#125;</span></div><div class="line"><span class="comment"> *      &#125; else &#123;</span></div><div class="line"><span class="comment"> *          System.out.println("acquire lock failed");</span></div><div class="line"><span class="comment"> *      &#125;</span></div><div class="line"><span class="comment"> *  &#125;&lt;/pre&gt;</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> Alois Belaska &lt;alois.belaska@gmail.com&gt;</span></div><div class="line"><span class="comment"> * <span class="doctag">@link</span> https://github.com/abelaska/jedis-lock</span></div><div class="line"><span class="comment"> * Redis distributed lock implementation</span></div><div class="line"><span class="comment"> * (fork by  Bruno Bossola &lt;bbossola@gmail.com&gt;)</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="meta">@NotThreadSafe</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JedisLock</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 默认过期时间</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_EXPIRY_TIME_MILLIS = Integer.getInteger(<span class="string">"com.common.jedis.lock.expiry.millis"</span>,</div><div class="line">        <span class="number">60</span> * <span class="number">1000</span>);</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 默认重新申请锁的重试等待时间</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_ACQUIRY_RESOLUTION_MILLIS = Integer.getInteger(</div><div class="line">        <span class="string">"com.common.jedis.lock.acquiry.resolution.millis"</span>, <span class="number">100</span>);</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 分布式锁使用的redis锁命名空间</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOCK_NAMESAPACE = <span class="string">"_LOCK"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(JedisLock.class);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String lockKeyPath;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> lockExpiryInMillis;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLockExpiryInMillis</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> lockExpiryInMillis;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Detailed constructor with default lock expiration of 60000 msecs.</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> namespace 命名空间</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> lockKey   lock key (ex. account:1, ...)</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JedisLock</span><span class="params">(String namespace, String lockKey)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(namespace, lockKey, DEFAULT_EXPIRY_TIME_MILLIS);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Detailed constructor.</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> namespace        命名空间</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> lockKey          lock key (ex. account:1, ...)</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> expiryTimeMillis lock expiration in miliseconds (default: 60000 msecs)</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JedisLock</span><span class="params">(String namespace, String lockKey, <span class="keyword">int</span> expiryTimeMillis)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.lockKeyPath = namespace + <span class="string">"/"</span> + LOCK_NAMESAPACE + <span class="string">"/"</span> + lockKey;</div><div class="line">        <span class="keyword">this</span>.lockExpiryInMillis = expiryTimeMillis;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span> lock key path</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLockKeyPath</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> lockKeyPath;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 0等，上锁失败立即返回false，不可重入</span></div><div class="line"><span class="comment">     * 分布式:依赖redis setnx原子操作</span></div><div class="line"><span class="comment">     * Acquire lock.</span></div><div class="line"><span class="comment">     * 注意: 如果争用到锁却不调用release函数（分布式锁自动失效），需要注意调用closeJedis，释放jedis实例</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span> true if lock is acquired, false acquire timeouted</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException in case of thread interruption</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">return</span> tryLock(<span class="number">0</span>, TimeUnit.MILLISECONDS);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 超时后返回false，不可重入</span></div><div class="line"><span class="comment">     * 分布式:依赖redis setnx原子操作</span></div><div class="line"><span class="comment">     * Acquire lock.</span></div><div class="line"><span class="comment">     * 注意: 如果争用到锁却不调用release函数（分布式锁自动失效），需要注意调用closeJedis，释放jedis实例</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> timeout 锁超时时间</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> unit    时间单位</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span> true if lock is acquired, false acquire timeouted</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException in case of thread interruption</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(<span class="keyword">int</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function">        <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> locked = <span class="keyword">false</span>;</div><div class="line">        Jedis jedis = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            jedis = JedisClientFactory.getJedisClient();</div><div class="line">            <span class="keyword">long</span> timeoutMillis = unit.toMillis(timeout);</div><div class="line">            <span class="keyword">while</span> (timeoutMillis &gt;= <span class="number">0</span>) &#123;</div><div class="line">                <span class="comment">//NX -- Only set the key if it does not already exist.</span></div><div class="line">                <span class="comment">//XX -- Only set the key if it already exist.</span></div><div class="line">                <span class="comment">//EX seconds -- Set the specified expire time, in seconds.</span></div><div class="line">                <span class="comment">//PX milliseconds -- Set the specified expire time, in milliseconds.</span></div><div class="line">                String result = jedis.set(lockKeyPath, <span class="string">"1"</span>, <span class="string">"NX"</span>, <span class="string">"PX"</span>,</div><div class="line">                    lockExpiryInMillis);</div><div class="line">                <span class="keyword">if</span> (<span class="string">"OK"</span>.equalsIgnoreCase(result)) &#123;</div><div class="line">                    locked = <span class="keyword">true</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//超时时间递减</span></div><div class="line">                timeoutMillis -= DEFAULT_ACQUIRY_RESOLUTION_MILLIS;</div><div class="line">                <span class="keyword">if</span> (timeoutMillis &gt; <span class="number">0</span>) &#123;</div><div class="line">                    Thread.sleep(DEFAULT_ACQUIRY_RESOLUTION_MILLIS);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            logger.error(<span class="string">"&#123;&#125; trylock failed!"</span>, lockKeyPath, e);</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="comment">//及时释放jedis链接</span></div><div class="line">            forceClose(jedis);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> locked;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 释放锁</span></div><div class="line"><span class="comment">     * 注意：release已经隐含了forceClose动作，请勿在调用release之前进行jedis实例释放</span></div><div class="line"><span class="comment">     * Acquired lock release.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span> </span>&#123;</div><div class="line">        Jedis jedis = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            jedis = JedisClientFactory.getJedisClient();</div><div class="line">            jedis.del(lockKeyPath);</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            forceClose(jedis);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 释放jedis链接,内部创建的jedis实例需要触发释放</span></div><div class="line"><span class="comment">     * 注意：release已经隐含了forceClose动作，请勿在调用release之前进行jedis实例释放</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">forceClose</span><span class="params">(Jedis jedis)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (jedis != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                jedis.close();</div><div class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                logger.error(<span class="string">"insure jedis is closed!"</span>, e);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            logger.info(<span class="string">"jedis is closed!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 是否已被锁</span></div><div class="line"><span class="comment">     * Check if owns the lock</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span> true if lock owned</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">isLocked</span><span class="params">()</span> </span>&#123;</div><div class="line">        Jedis jedis = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">boolean</span> isExists = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            jedis = JedisClientFactory.getJedisClient();</div><div class="line">            isExists = jedis.exists(lockKeyPath);</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            forceClose(jedis);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> isExists;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -433,307 +427,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/12/08/SQL审核与优化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/08/SQL审核与优化/" itemprop="url">SQL审核与优化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:48:04+08:00">
-                2017-12-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
           
-            
+            <a href="/tags/分布式锁/" rel="tag"># 分布式锁</a>
           
-
-          
-          
-             <span id="/2017/12/08/SQL审核与优化/" class="leancloud_visitors" data-flag-title="SQL审核与优化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>SQL审核和优化(转)，常用mysql性能问题诊断</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/10/01/Mockito的使用及原理分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/01/Mockito的使用及原理分析/" itemprop="url">Mockito的使用及原理分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T14:33:17+08:00">
-                2017-10-01
-              </time>
+              <a href="/2017/12/08/SQL审核与优化/" rel="next" title="SQL审核与优化">
+                <i class="fa fa-chevron-left"></i> SQL审核与优化
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/单元测试/" itemprop="url" rel="index">
-                    <span itemprop="name">单元测试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/01/Mockito的使用及原理分析/" class="leancloud_visitors" data-flag-title="Mockito的使用及原理分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>本文包含以下内容：</p>
-<ul>
-<li>如何使用Mockito写单元测试</li>
-<li>Mockito实现原理浅析</li>
-<li>模仿Mockito实现mock功能</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/01/Mockito的使用及原理分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -743,493 +468,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/09/27/Nginx多站点配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/27/Nginx多站点配置/" itemprop="url">Nginx多站点配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-27T16:21:35+08:00">
-                2017-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/27/Nginx多站点配置/" class="leancloud_visitors" data-flag-title="Nginx多站点配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文包含以下内容：</p>
-<ul>
-<li>Nginx多站点映射不同域名配置</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/27/Nginx多站点配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/09/11/Linux环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/11/Linux环境配置/" itemprop="url">Linux环境配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T21:19:00+08:00">
-                2017-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/11/Linux环境配置/" class="leancloud_visitors" data-flag-title="Linux环境配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文包括以下内容：</p>
-<ul>
-<li>jdk 1.8安装</li>
-<li>mysql安装及远程访问配置</li>
-<li>ftp配置</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/11/Linux环境配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/08/31/编写健壮的单元测试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/31/编写健壮的单元测试/" itemprop="url">编写健壮的单元测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T13:57:20+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/单元测试/" itemprop="url" rel="index">
-                    <span itemprop="name">单元测试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/31/编写健壮的单元测试/" class="leancloud_visitors" data-flag-title="编写健壮的单元测试">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文包括以下内容：</p>
-<ul>
-<li>如何解决数据依赖，编写健壮的单元测试</li>
-<li>如何处理异常分支和边界场景</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/31/编写健壮的单元测试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1237,6 +480,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -1445,10 +692,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
