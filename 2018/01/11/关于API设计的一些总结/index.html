@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="何不梦一场的博客">
 <meta property="og:description" content="本文包含以下内容：  关于API设计的一些总计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-11T02:57:20.000Z">
+<meta property="og:updated_time" content="2018-01-25T07:10:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于API设计的一些总结">
 <meta name="twitter:description" content="本文包含以下内容：  关于API设计的一些总计">
@@ -454,6 +454,7 @@
 <li>时态要准确，过去式、进行时等也能表现接口含义，反映接口智能，需要写对</li>
 <li>避免生僻单词，易读就好</li>
 <li>避免非常规缩写，比如 count-&gt;cnt</li>
+<li>接口中不宜出现枚举，尤其对于变化频率较高的枚举，如果修改或者删除任意枚举值，都可能导致序列化异常</li>
 </ul>
 
       
