@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Git," />
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="SQL审核和优化(转)，常用mysql性能问题诊断">
+<meta name="description" content="本文包含以下内容：  配置Git commitizen规范Git提交内容">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL审核与优化">
-<meta property="og:url" content="http://nbxjf.github.com/2017/12/08/SQL审核与优化/index.html">
+<meta property="og:title" content="Git提交Message规范">
+<meta property="og:url" content="http://nbxjf.github.com/2019/03/21/Git提交Message规范/index.html">
 <meta property="og:site_name" content="何不梦一场的博客">
-<meta property="og:description" content="SQL审核和优化(转)，常用mysql性能问题诊断">
+<meta property="og:description" content="本文包含以下内容：  配置Git commitizen规范Git提交内容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-08T02:49:42.000Z">
+<meta property="og:updated_time" content="2019-03-21T00:28:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL审核与优化">
-<meta name="twitter:description" content="SQL审核和优化(转)，常用mysql性能问题诊断">
+<meta name="twitter:title" content="Git提交Message规范">
+<meta name="twitter:description" content="本文包含以下内容：  配置Git commitizen规范Git提交内容">
 
 
 
@@ -128,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://nbxjf.github.com/2017/12/08/SQL审核与优化/"/>
+  <link rel="canonical" href="http://nbxjf.github.com/2019/03/21/Git提交Message规范/"/>
 
 
 
 
 
-  <title>SQL审核与优化 | 何不梦一场的博客</title>
+  <title>Git提交Message规范 | 何不梦一场的博客</title>
   
 
 
@@ -304,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/12/08/SQL审核与优化/">
+    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2019/03/21/Git提交Message规范/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="何不梦一场">
@@ -321,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL审核与优化</h1>
+          <h1 class="post-title" itemprop="name headline">Git提交Message规范</h1>
         
 
         <div class="post-meta">
@@ -333,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:48:04+08:00">
-                2017-12-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T08:11:22+08:00">
+                2019-03-21
               </time>
             
 
@@ -351,7 +352,7 @@
 
           
           
-             <span id="/2017/12/08/SQL审核与优化/" class="leancloud_visitors" data-flag-title="SQL审核与优化">
+             <span id="/2019/03/21/Git提交Message规范/" class="leancloud_visitors" data-flag-title="Git提交Message规范">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,7 +383,40 @@
       
 
       
-        <p>SQL审核和优化(转)，常用mysql性能问题诊断</p>
+        <p>本文包含以下内容：</p>
+<ul>
+<li>配置Git commitizen规范Git提交内容</li>
+</ul>
+<a id="more"></a>
+<h4 id="1-为什么需要commitizen规范"><a href="#1-为什么需要commitizen规范" class="headerlink" title="1. 为什么需要commitizen规范"></a>1. 为什么需要commitizen规范</h4><p>在Git commit时，必要的message是用以描述本次提交的内容的，可以让团队成员清楚的知道本次提交的内容，也可以清晰的表现出不同的分支间的差异，甚至在版本回退时可以简洁明了的找出需要回退的版本，试想如果在版本回退的时候看到一大段糟心的 Commit，是不是会难受。<br>所以，不以规矩，不成方圆。</p>
+<h4 id="3-公式"><a href="#3-公式" class="headerlink" title="3.公式"></a>3.公式</h4><p>先来看看提交的公式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>type用以描述commit的类别</li>
+<li>scope用以描述影响的范围</li>
+<li>subject是本次提交的描述信息</li>
+</ul>
+<h4 id="2-如何配置"><a href="#2-如何配置" class="headerlink" title="2.如何配置"></a>2.如何配置</h4><ol>
+<li><p>brew install npm 安装npm</p>
+</li>
+<li><p>sudo npm install -g commitizen 全局安装commitizen</p>
+</li>
+<li><p>项目中执行初始化 npm init 生成package.json</p>
+</li>
+<li><p>项目中执行安装cz-customizable ， npm install cz-customizable –save-dev</p>
+</li>
+<li><p>项目目录下创建自定义cz-config.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"> </div><div class="line">module.exports = &#123;</div><div class="line"> </div><div class="line">    types: [</div><div class="line">        &#123;value: &apos;feat&apos;, name: &apos;feat:     新功能&apos;&#125;,</div><div class="line">        &#123;value: &apos;refactor&apos;, name: &apos;refactor: 代码重构&apos;&#125;,</div><div class="line">        &#123;value: &apos;WIP&apos;, name: &apos;WIP:      暂时提交&apos;&#125;,</div><div class="line">        &#123;value: &apos;fix&apos;, name: &apos;fix:      bug修复&apos;&#125;,</div><div class="line">        &#123;value: &apos;perf&apos;, name: &apos;perf:     性能优化&apos;&#125;,</div><div class="line">        &#123;value: &apos;docs&apos;, name: &apos;docs:     文档变更&apos;&#125;,</div><div class="line">        &#123;value: &apos;style&apos;, name: &apos;style:    代码格式化&apos;&#125;,</div><div class="line">        &#123;value: &apos;test&apos;, name: &apos;test:     添加测试用例&apos;&#125;,</div><div class="line">        &#123;value: &apos;chore&apos;, name: &apos;chore:    构建过程或辅助工具的变动&apos;&#125;,</div><div class="line">        &#123;value: &apos;revert&apos;, name: &apos;revert:   回滚&apos;&#125;</div><div class="line">    ],</div><div class="line"> </div><div class="line">    scopes: [</div><div class="line">        &#123;name: &apos;api&apos;&#125;,</div><div class="line">        &#123;name: &apos;service&apos;&#125;,</div><div class="line">        &#123;name: &apos;dao&apos;&#125;</div><div class="line">    ],</div><div class="line"> </div><div class="line">    // 比较适合db项目</div><div class="line">    // allowTicketNumber: true,</div><div class="line">    // isTicketNumberRequired: true,</div><div class="line">    // ticketNumberPrefix: &apos;JIRA-&apos;,</div><div class="line">    // ticketNumberRegExp: &apos;\\d&#123;1,5&#125;&apos;,</div><div class="line"> </div><div class="line">    // it needs to match the value for field type. Eg.: &apos;fix&apos;</div><div class="line">    /*</div><div class="line">     scopeOverrides: &#123;</div><div class="line">     fix: [</div><div class="line"> </div><div class="line">     &#123;name: &apos;merge&apos;&#125;,</div><div class="line">     &#123;name: &apos;style&apos;&#125;,</div><div class="line">     &#123;name: &apos;e2eTest&apos;&#125;,</div><div class="line">     &#123;name: &apos;unitTest&apos;&#125;</div><div class="line">     ]</div><div class="line">     &#125;,</div><div class="line">     */</div><div class="line">    // override the messages, defaults are as follows</div><div class="line">    messages: &#123;</div><div class="line">        type: &apos;选择当前的提交类型:&apos;,</div><div class="line">        scope: &apos;\n影响面:&apos;,</div><div class="line">        // used if allowCustomScopes is true</div><div class="line">        customScope: &apos;自定义影响面:&apos;,</div><div class="line">        subject: &apos;简单描述这次提交:\n&apos;,</div><div class="line">        body: &apos;详细描述这次提交. 试用 &quot;|&quot; 换行:\n&apos;,</div><div class="line">        breaking: &apos;列举主要变化点(可选):\n&apos;,</div><div class="line">        footer: &apos;List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n&apos;,</div><div class="line">        confirmCommit: &apos;确认提交?&apos;</div><div class="line">    &#125;,</div><div class="line"> </div><div class="line">    allowCustomScopes: true,</div><div class="line">    allowBreakingChanges: [&apos;fix&apos;],</div><div class="line">    // skip any questions you want</div><div class="line">    skipQuestions: [&apos;body&apos;, &apos;footer&apos;],</div><div class="line"> </div><div class="line">    // limit subject length</div><div class="line">    subjectLimit: 100,</div><div class="line">    // min subject length</div><div class="line">    subjectMin:1</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改package.json中的配置信息</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&quot;config&quot;: &#123;</div><div class="line">  &quot;commitizen&quot;: &#123;</div><div class="line">    &quot;path&quot;: &quot;node_modules/cz-customizable&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;cz-customizable&quot;: &#123;</div><div class="line">    &quot;config&quot;: &quot;cz-config.js&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>替换node_modules/cz-customizable中questions.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"> </div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var path = require(&apos;path&apos;);</div><div class="line">var buildCommit = require(&apos;./buildCommit&apos;);</div><div class="line">var log = require(&apos;./logger&apos;);</div><div class="line"> </div><div class="line">var isNotWip = function(answers) &#123;</div><div class="line">  return answers.type.toLowerCase() !== &apos;wip&apos;;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">var cwd = fs.realpathSync(process.cwd());</div><div class="line">var packageData = require(path.join(cwd, &apos;package.json&apos;));</div><div class="line"> </div><div class="line">function isValidateTicketNo(value, config) &#123;</div><div class="line">  if (!value) &#123;</div><div class="line">    return config.isTicketNumberRequired ? false : true;</div><div class="line">  &#125;</div><div class="line">  if (!config.ticketNumberRegExp) &#123;</div><div class="line">    return true;</div><div class="line">  &#125;</div><div class="line">  var reg = new RegExp(config.ticketNumberRegExp);</div><div class="line">  if (value.replace(reg, &apos;&apos;) !== &apos;&apos;) &#123;</div><div class="line">    return false;</div><div class="line">  &#125;</div><div class="line">  return true;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">module.exports = &#123;</div><div class="line"> </div><div class="line">  getQuestions: function(config, cz) &#123;</div><div class="line"> </div><div class="line">    // normalize config optional options</div><div class="line">    var scopeOverrides = config.scopeOverrides || &#123;&#125;;</div><div class="line">    var messages = config.messages || &#123;&#125;;</div><div class="line">    var skipQuestions = config.skipQuestions || [];</div><div class="line"> </div><div class="line">    messages.type = messages.type || &apos;Select the type of change that you\&apos;re committing:&apos;;</div><div class="line">    messages.scope = messages.scope || &apos;\nDenote the SCOPE of this change (optional):&apos;;</div><div class="line">    messages.customScope = messages.customScope || &apos;Denote the SCOPE of this change:&apos;;</div><div class="line">    if (!messages.ticketNumber) &#123;</div><div class="line">      if (config.ticketNumberRegExp) &#123;</div><div class="line">        messages.ticketNumber = messages.ticketNumberPattern || &apos;Enter the ticket number following this pattern (&apos; + config.ticketNumberRegExp + &apos;)\n&apos;;</div><div class="line">      &#125; else &#123;</div><div class="line">        messages.ticketNumber = &apos;Enter the ticket number:\n&apos;;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    messages.subject = messages.subject || &apos;Write a SHORT, IMPERATIVE tense description of the change:\n&apos;;</div><div class="line">    messages.body = messages.body || &apos;Provide a LONGER description of the change (optional). Use &quot;|&quot; to break new line:\n&apos;;</div><div class="line">    messages.breaking = messages.breaking || &apos;List any BREAKING CHANGES (optional):\n&apos;;</div><div class="line">    messages.footer = messages.footer || &apos;List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n&apos;;</div><div class="line">    messages.confirmCommit = messages.confirmCommit || &apos;Are you sure you want to proceed with the commit above?&apos;;</div><div class="line"> </div><div class="line">    var questions = [</div><div class="line">      &#123;</div><div class="line">        type: &apos;list&apos;,</div><div class="line">        name: &apos;type&apos;,</div><div class="line">        message: messages.type,</div><div class="line">        choices: config.types</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;list&apos;,</div><div class="line">        name: &apos;scope&apos;,</div><div class="line">        message: messages.scope,</div><div class="line">        choices: function(answers) &#123;</div><div class="line">          var scopes = [];</div><div class="line">          if (scopeOverrides[answers.type]) &#123;</div><div class="line">            scopes = scopes.concat(scopeOverrides[answers.type]);</div><div class="line">          &#125; else &#123;</div><div class="line">            scopes = scopes.concat(config.scopes);</div><div class="line">          &#125;</div><div class="line">          if (config.allowCustomScopes || scopes.length === 0) &#123;</div><div class="line">            scopes = scopes.concat([</div><div class="line">              new cz.Separator(),</div><div class="line">              &#123; name: &apos;empty&apos;, value: false &#125;,</div><div class="line">              &#123; name: &apos;custom&apos;, value: &apos;custom&apos; &#125;</div><div class="line">            ]);</div><div class="line">          &#125;</div><div class="line">          return scopes;</div><div class="line">        &#125;,</div><div class="line">        when: function(answers) &#123;</div><div class="line">          var hasScope = false;</div><div class="line">          if (scopeOverrides[answers.type]) &#123;</div><div class="line">            hasScope = !!(scopeOverrides[answers.type].length &gt; 0);</div><div class="line">          &#125; else &#123;</div><div class="line">            hasScope = !!(config.scopes &amp;&amp; (config.scopes.length &gt; 0));</div><div class="line">          &#125;</div><div class="line">          if (!hasScope) &#123;</div><div class="line">            answers.scope = &apos;custom&apos;;</div><div class="line">            return false;</div><div class="line">          &#125; else &#123;</div><div class="line">            return isNotWip(answers);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;scope&apos;,</div><div class="line">        message: messages.customScope,</div><div class="line">        when: function(answers) &#123;</div><div class="line">          return answers.scope === &apos;custom&apos;;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;ticketNumber&apos;,</div><div class="line">        message: messages.ticketNumber,</div><div class="line">        when: function() &#123;</div><div class="line">          return !!config.allowTicketNumber; // no ticket numbers allowed unless specifed</div><div class="line">        &#125;,</div><div class="line">        validate: function (value) &#123;</div><div class="line">          return isValidateTicketNo(value, config);</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;subject&apos;,</div><div class="line">        message: messages.subject,</div><div class="line">        validate: function(value) &#123;</div><div class="line">          var limit = config.subjectLimit || 100;</div><div class="line">          if (value.length &gt; limit) &#123;</div><div class="line">            return &apos;Exceed limit: &apos; + limit;</div><div class="line">          &#125;</div><div class="line">          const minLength = config.subjectMin || 0;</div><div class="line">          if (value.length &lt; minLength) &#123;</div><div class="line">              return &apos;Less than minimum length:&apos; + minLength;</div><div class="line">          &#125;</div><div class="line">          return true;</div><div class="line">        &#125;,</div><div class="line">        filter: function(value) &#123;</div><div class="line">          return value.charAt(0).toLowerCase() + value.slice(1);</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;body&apos;,</div><div class="line">        message: messages.body</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;breaking&apos;,</div><div class="line">        message: messages.breaking,</div><div class="line">        when: function(answers) &#123;</div><div class="line">          if (config.allowBreakingChanges &amp;&amp; config.allowBreakingChanges.indexOf(answers.type.toLowerCase()) &gt;= 0) &#123;</div><div class="line">            return true;</div><div class="line">          &#125;</div><div class="line">          return false; // no breaking changes allowed unless specifed</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;input&apos;,</div><div class="line">        name: &apos;footer&apos;,</div><div class="line">        message: messages.footer,</div><div class="line">        when: isNotWip</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        type: &apos;expand&apos;,</div><div class="line">        name: &apos;confirmCommit&apos;,</div><div class="line">        choices: [</div><div class="line">          &#123; key: &apos;y&apos;, name: &apos;Yes&apos;, value: &apos;yes&apos; &#125;,</div><div class="line">          &#123; key: &apos;n&apos;, name: &apos;Abort commit&apos;, value: &apos;no&apos; &#125;,</div><div class="line">          &#123; key: &apos;e&apos;, name: &apos;Edit message&apos;, value: &apos;edit&apos; &#125;</div><div class="line">        ],</div><div class="line">        message: function(answers) &#123;</div><div class="line">          var SEP = &apos;###--------------------------------------------------------###&apos;;</div><div class="line">          log.info(&apos;\n&apos; + SEP + &apos;\n&apos; + buildCommit(answers, config) + &apos;\n&apos; + SEP + &apos;\n&apos;);</div><div class="line">          return messages.confirmCommit;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ];</div><div class="line"> </div><div class="line">    questions = questions.filter(function(item) &#123;</div><div class="line">      return !skipQuestions.includes(item.name);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    return questions;</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用git cz取代git commit -m 进行commit message编辑；</p>
+</li>
+</ol>
 
       
     </div>
@@ -398,6 +432,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
 
       
       
@@ -407,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/01/Mockito的使用及原理分析/" rel="next" title="Mockito的使用及原理分析">
-                <i class="fa fa-chevron-left"></i> Mockito的使用及原理分析
+              <a href="/2018/01/11/关于API设计的一些总结/" rel="next" title="关于API设计的一些总结">
+                <i class="fa fa-chevron-left"></i> 关于API设计的一些总结
               </a>
             
           </div>
@@ -416,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/13/基于Redis实现分布式锁/" rel="prev" title="基于Redis实现分布式锁">
-                基于Redis实现分布式锁 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -471,8 +507,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -536,6 +581,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-为什么需要commitizen规范"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么需要commitizen规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-公式"><span class="nav-number">2.</span> <span class="nav-text">3.公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-如何配置"><span class="nav-number">3.</span> <span class="nav-text">2.如何配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
