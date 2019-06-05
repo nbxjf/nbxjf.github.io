@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://nbxjf.github.com/2019/06/05/img/Spring事务问题分析_img/transaction.png">
 <meta property="og:image" content="http://nbxjf.github.com/2019/06/05/img/Spring事务问题分析_img/transactionutil.png">
 <meta property="og:image" content="http://nbxjf.github.com/2019/06/05/img/Spring事务问题分析_img/method_timeout.png">
-<meta property="og:updated_time" content="2019-06-05T02:51:19.212Z">
+<meta property="og:updated_time" content="2019-06-05T02:56:19.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Transaction Analysize">
 <meta name="twitter:description" content="Spring Transaction Analysize问题描述 前言 20190525-Mybatis OGNL导致的并发安全问题 ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2 为解决OGNL的并发问题，将mybatis升级是3.4.0版本，mybatis-spring升级至1.3.0版本，但是此时发现稳定报错Transaction time out">
@@ -414,9 +414,10 @@
 
       
         <h1 id="Spring-Transaction-Analysize"><a href="#Spring-Transaction-Analysize" class="headerlink" title="Spring Transaction Analysize"></a>Spring Transaction Analysize</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ol>
-<li>前言 <a href="http://confluence.yit.com/pages/viewpage.action?pageId=6856550" target="_blank" rel="external">20190525-Mybatis OGNL导致的并发安全问题</a> ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2</li>
+<li>前言 <a href="https://nbxjf.github.io/2019/05/28/ognl版本问题分析/" target="_blank" rel="external">20190525-Mybatis OGNL导致的并发安全问题</a> ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2</li>
 <li>为解决OGNL的并发问题，将mybatis升级是3.4.0版本，mybatis-spring升级至1.3.0版本，但是此时发现稳定报错<code>Transaction time out</code><img src="../img/Spring事务问题分析_img/timeout@2x.png" alt=""></li>
 </ol>
+<a id="more"></a>
 <h3 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h3><ol>
 <li><p>在本地invoke method无法重现事务问题</p>
 <p><img src="../img/Spring事务问题分析_img/invoke.png" alt=""></p>
