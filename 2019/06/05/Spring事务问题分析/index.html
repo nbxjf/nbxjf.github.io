@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -67,21 +67,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="问题排查," />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="问题排查,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
 
 
 
@@ -137,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="http://nbxjf.github.com/2019/06/05/Spring事务问题分析/"/>
+  <link rel="canonical" href="http://nbxjf.github.com/2019/06/05/Spring事务问题分析/">
 
 
 
@@ -180,7 +180,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">何不梦一场的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -210,7 +210,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -253,7 +253,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -274,9 +274,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -317,7 +315,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -353,7 +351,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -415,18 +413,18 @@
       
         <h1 id="Spring-Transaction-Analysize"><a href="#Spring-Transaction-Analysize" class="headerlink" title="Spring Transaction Analysize"></a>Spring Transaction Analysize</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ol>
 <li>前言 <a href="https://nbxjf.github.io/2019/05/28/ognl版本问题分析/" target="_blank" rel="external">20190525-Mybatis OGNL导致的并发安全问题</a> ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2</li>
-<li>为解决OGNL的并发问题，将mybatis升级是3.4.0版本，mybatis-spring升级至1.3.0版本，但是此时发现稳定报错<code>Transaction time out</code><img src="../img/Spring事务问题分析_img/timeout@2x.png" alt=""></li>
+<li>为解决OGNL的并发问题，将mybatis升级是3.4.0版本，mybatis-spring升级至1.3.0版本，但是此时发现稳定报错<code>Transaction time out</code><img src="../img/Spring事务问题分析_img/timeout@2x.png" alt></li>
 </ol>
 <a id="more"></a>
 <h3 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h3><ol>
 <li><p>在本地invoke method无法重现事务问题</p>
-<p><img src="../img/Spring事务问题分析_img/invoke.png" alt=""></p>
+<p><img src="../img/Spring事务问题分析_img/invoke.png" alt></p>
 </li>
 <li><p>显示的声明defaultTimeout并不能规避<code>Transaction time out</code>报错</p>
-<p><img src="../img/Spring事务问题分析_img/timeoutconfig.png" alt=""></p>
+<p><img src="../img/Spring事务问题分析_img/timeoutconfig.png" alt></p>
 </li>
 <li><p>remote debug偶然发现有<code>setDefaultTimeout = 0</code>的操作</p>
-<p><img src="../img/Spring事务问题分析_img/setDefaultTimeout.png" alt=""></p>
+<p><img src="../img/Spring事务问题分析_img/setDefaultTimeout.png" alt></p>
 <ul>
 <li><p>堆栈信息发现来自TransactionUtil</p>
 </li>
@@ -443,7 +441,7 @@
 </ol>
 <ol>
 <li><p>TransactionUtil中设置timeout的方法如下</p>
-<p><img src="../img/Spring事务问题分析_img/transactionutil.png" alt=""></p>
+<p><img src="../img/Spring事务问题分析_img/transactionutil.png" alt></p>
 <ul>
 <li><p>timeout的默认值是0</p>
 </li>
@@ -470,7 +468,7 @@
 </ol>
 <h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><ol>
 <li><p>观测到在注解中声明的timeout并不会修改defaultTimeout值并且作用于spring事务</p>
-<p><img src="../img/Spring事务问题分析_img/method_timeout.png" alt=""></p>
+<p><img src="../img/Spring事务问题分析_img/method_timeout.png" alt></p>
 </li>
 <li><p>查看源码，会优先使用defination中设置的timeout，只有当TransactionDefinition中的timeout未设置或者等于<code>TransactionDefinition.TIMEOUT_DEFAULT</code>的时候，defaultTimeout才会生效</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">	 * Determine the actual timeout to use for the given definition.</span></div><div class="line"><span class="comment">	 * Will fall back to this manager's default timeout if the</span></div><div class="line"><span class="comment">	 * transaction definition doesn't specify a non-default value.</span></div><div class="line"><span class="comment">	 * <span class="doctag">@param</span> definition the transaction definition</span></div><div class="line"><span class="comment">	 * <span class="doctag">@return</span> the actual timeout to use</span></div><div class="line"><span class="comment">	 * <span class="doctag">@see</span> org.springframework.transaction.TransactionDefinition#getTimeout()</span></div><div class="line"><span class="comment">	 * <span class="doctag">@see</span> #setDefaultTimeout</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">determineTimeout</span><span class="params">(TransactionDefinition definition)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (definition.getTimeout() != TransactionDefinition.TIMEOUT_DEFAULT) &#123;</div><div class="line">			<span class="keyword">return</span> definition.getTimeout();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.defaultTimeout;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
@@ -573,7 +571,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -584,9 +582,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="何不梦一场" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="何不梦一场">
           <p class="site-author-name" itemprop="name">何不梦一场</p>
            
               <p class="site-description motion-element" itemprop="description">人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！</p>
@@ -599,7 +595,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -610,7 +606,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -621,7 +617,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -656,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Transaction-Analysize"><span class="nav-number">1.</span> <span class="nav-text">Spring Transaction Analysize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查过程"><span class="nav-number">1.0.2.</span> <span class="nav-text">排查过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">1.0.3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方式"><span class="nav-number">1.0.4.</span> <span class="nav-text">解决方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">1.0.5.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Transaction-Analysize"><span class="nav-number">1.</span> <span class="nav-text">Spring Transaction Analysize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查过程"><span class="nav-number">1.0.2.</span> <span class="nav-text">排查过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">1.0.3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方式"><span class="nav-number">1.0.4.</span> <span class="nav-text">解决方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">1.0.5.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -676,10 +672,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

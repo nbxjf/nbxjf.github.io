@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="9月28日，我正式开始了我的实习之旅。面试的工作ETL与API开发实习生，但是进入了部门之后，部门中用的很大一部门是python的代码，所以，我开始学习Python大法了">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-study">
+<meta property="og:url" content="http://nbxjf.github.com/2016/11/13/python-study/index.html">
+<meta property="og:site_name" content="何不梦一场的博客">
+<meta property="og:description" content="9月28日，我正式开始了我的实习之旅。面试的工作ETL与API开发实习生，但是进入了部门之后，部门中用的很大一部门是python的代码，所以，我开始学习Python大法了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-11-13T15:32:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-study">
+<meta name="twitter:description" content="9月28日，我正式开始了我的实习之旅。面试的工作ETL与API开发实习生，但是进入了部门之后，部门中用的很大一部门是python的代码，所以，我开始学习Python大法了">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nbxjf.github.com/2016/11/13/python-study/">
+
+
+
+
+
+  <title>python-study | 何不梦一场的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?accd835abeb77600e50e59085d6dc7f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">何不梦一场的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Jeff xu</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2016/11/13/python-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="何不梦一场">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何不梦一场的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python-study</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-13T21:20:19+08:00">
+                2016-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/13/python-study/" class="leancloud_visitors" data-flag-title="python-study">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>9月28日，我正式开始了我的实习之旅。面试的工作ETL与API开发实习生，但是进入了部门之后，部门中用的很大一部门是python的代码，所以，我开始学习Python大法了<br><a id="more"></a></p>
+<h3 id="python爬虫入门"><a href="#python爬虫入门" class="headerlink" title="python爬虫入门"></a>python爬虫入门</h3><ul>
+<li>说起python，很直观的感觉就是python的爬虫功能十分强大，打开github搜索python爬虫，数不清的demo，这给我的入门学习提供了很好的案例参考</li>
+</ul>
+<h5 id="第一个demo，糗事百科爬虫"><a href="#第一个demo，糗事百科爬虫" class="headerlink" title="第一个demo，糗事百科爬虫"></a>第一个demo，糗事百科爬虫</h5><ul>
+<li><p>模仿网上的案例教程，写了第一个爬取糗事百科的crawler</p>
+<ul>
+<li><p>urlib2是使用各种协议完成打开url的一个扩展包，最简单的使用方式是调用urlopen方法</p>
+<pre><code>def urlopen(url, data=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
+</code></pre></li>
+<li>可以接受一个字符串型的url地址或者一个Request对象，将打开这个url并返回结果为一个像文件对象一样的对象</li>
+</ul>
+</li>
+<li><p>完成代码如下</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br></pre></td><td class="code"><pre><span class="line">			<span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">	</span><br><span class="line">			<span class="keyword">import</span> urllib2</span><br><span class="line">			<span class="keyword">import</span> re</span><br><span class="line">			<span class="keyword">import</span> thread</span><br><span class="line">			<span class="keyword">import</span> time</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">			<span class="comment"># ----------- 加载处理糗事百科 -----------</span></span><br><span class="line">			<span class="class"><span class="keyword">class</span> <span class="title">Spider_Model</span>:</span></span><br><span class="line">			    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">			        self.page = <span class="number">1</span></span><br><span class="line">			        self.pages = []</span><br><span class="line">			        self.enable = <span class="keyword">False</span></span><br><span class="line">			</span><br><span class="line">			    <span class="function"><span class="keyword">def</span> <span class="title">getPage</span><span class="params">(self, page)</span>:</span></span><br><span class="line">			        url = <span class="string">"http://m.qiushibaike.com/hot/page/"</span> + str(page)</span><br><span class="line">			        user_agent = <span class="string">'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'</span></span><br><span class="line">			        headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line">			        req = urllib2.Request(url, headers=headers)</span><br><span class="line">			        response = urllib2.urlopen(req)</span><br><span class="line">			        myPage = response.read()</span><br><span class="line">			        unicodePage = myPage.decode(<span class="string">"utf-8"</span>)</span><br><span class="line">			</span><br><span class="line">			        myItems = re.findall(<span class="string">'&lt;div.*?class="content"&gt;(.*?)&lt;span&gt;(.*?)&lt;/span&gt;(.*?)&lt;/div&gt;'</span>, unicodePage, re.S)</span><br><span class="line">			        items = []</span><br><span class="line">			        <span class="keyword">for</span> item <span class="keyword">in</span> myItems:</span><br><span class="line">			            <span class="keyword">print</span> item[<span class="number">1</span>]</span><br><span class="line">			            items.append(item[<span class="number">1</span>])</span><br><span class="line">			        <span class="keyword">return</span> items</span><br><span class="line">			</span><br><span class="line">			    <span class="function"><span class="keyword">def</span> <span class="title">LoadData</span><span class="params">(self)</span>:</span></span><br><span class="line">			        <span class="keyword">while</span> self.enable:</span><br><span class="line">			            <span class="keyword">if</span> len(self.pages) &lt; <span class="number">2</span>:</span><br><span class="line">			                <span class="keyword">try</span>:</span><br><span class="line">			                    myPage = self.getPage(self.page)</span><br><span class="line">			                    self.page += <span class="number">1</span></span><br><span class="line">			                    self.pages.append(myPage)</span><br><span class="line">			                <span class="keyword">except</span>:</span><br><span class="line">			                    <span class="keyword">print</span> <span class="string">"无法链接糗事百科"</span></span><br><span class="line">			            <span class="keyword">else</span>:</span><br><span class="line">			                time.sleep(<span class="number">1</span>)</span><br><span class="line">			</span><br><span class="line">			    <span class="function"><span class="keyword">def</span> <span class="title">ShowPage</span><span class="params">(self, nowPage)</span>:</span></span><br><span class="line">			        <span class="keyword">for</span> item <span class="keyword">in</span> nowPage:</span><br><span class="line">			            <span class="keyword">print</span> item</span><br><span class="line">			            <span class="comment"># print self.pages</span></span><br><span class="line">			</span><br><span class="line">			    <span class="function"><span class="keyword">def</span> <span class="title">Start</span><span class="params">(self)</span>:</span></span><br><span class="line">			        self.enable = <span class="keyword">True</span></span><br><span class="line">			</span><br><span class="line">			        thread.start_new_thread(self.LoadData, ())</span><br><span class="line">			</span><br><span class="line">			        <span class="keyword">while</span> self.enable:</span><br><span class="line">			            <span class="comment"># self.pages数组中有元素</span></span><br><span class="line">			            <span class="keyword">if</span> self.pages:</span><br><span class="line">			                nowPage = self.pages[<span class="number">0</span>]</span><br><span class="line">			                <span class="keyword">del</span> self.pages[<span class="number">0</span>]</span><br><span class="line">			                self.ShowPage(nowPage)</span><br><span class="line">			</span><br><span class="line">			                <span class="comment"># ----------- 程序的入口处 -----------</span></span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">print</span> <span class="string">u"""</span></span><br><span class="line"><span class="string">			---------------------------------------</span></span><br><span class="line"><span class="string">			   程序：糗百爬虫</span></span><br><span class="line"><span class="string">			   版本：1.0</span></span><br><span class="line"><span class="string">			   作者：Jeff_xu</span></span><br><span class="line"><span class="string">			   日期：2016-10-18</span></span><br><span class="line"><span class="string">			   语言：Python 2.7</span></span><br><span class="line"><span class="string">			   操作：输入quit退出阅读糗事百科</span></span><br><span class="line"><span class="string">			   功能：按下回车依次浏览今日的糗百热点</span></span><br><span class="line"><span class="string">			---------------------------------------</span></span><br><span class="line"><span class="string">			"""</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">print</span> <span class="string">u'请按下回车浏览今日的糗百内容：'</span></span><br><span class="line">			raw_input(<span class="string">' '</span>)</span><br><span class="line">			myModel = Spider_Model()</span><br><span class="line">			myModel.Start()</span><br><span class="line"></span><br><span class="line"><span class="comment">##### 第二个demo，爬取百度贴吧</span></span><br><span class="line">* re模块（正则表达式）</span><br><span class="line">	* re.match(pattern, string, flags)</span><br><span class="line">		* 第一个参数是正则表达式，这里为<span class="string">"(\w+)\s"</span>，如果匹配成功，则返回一个Match，否则返回一个<span class="keyword">None</span>；</span><br><span class="line">		* 第二个参数表示要匹配的字符串；</span><br><span class="line">		* 第三个参数是标致位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等</span><br><span class="line">	*  re.search(pattern, string, flags)</span><br><span class="line">		*  每个参数的含意与re.match一样</span><br><span class="line">		*  re.match与re.search的区别：re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回<span class="keyword">None</span>；而re.search匹配整个字符串，直到找到一个匹配</span><br><span class="line">	* re.sub</span><br><span class="line">	* re.findall</span><br><span class="line">		* re.findall可以获取字符串中所有匹配的字符串</span><br><span class="line">	* re.compile</span><br><span class="line">		* 可以把正则表达式编译成一个正则表达式对象</span><br><span class="line">		</span><br><span class="line">* 详细代码</span><br><span class="line"></span><br><span class="line">		```python</span><br><span class="line">		<span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">import</span> string</span><br><span class="line">		<span class="keyword">import</span> urllib2</span><br><span class="line">		<span class="keyword">import</span> re</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment"># ----------- 处理页面上的各种标签 -----------</span></span><br><span class="line">		<span class="class"><span class="keyword">class</span> <span class="title">HTML_Tool</span>:</span></span><br><span class="line">		    <span class="comment"># 用非 贪婪模式 匹配 \t 或者 \n 或者 空格 或者 超链接 或者 图片</span></span><br><span class="line">		    BgnCharToNoneRex = re.compile(<span class="string">"(\t|\n| |&lt;a.*?&gt;|&lt;img.*?&gt;)"</span>)</span><br><span class="line">		</span><br><span class="line">		    <span class="comment"># 用非 贪婪模式 匹配 任意&lt;&gt;标签</span></span><br><span class="line">		    EndCharToNoneRex = re.compile(<span class="string">"&lt;.*?&gt;"</span>)</span><br><span class="line">		</span><br><span class="line">		    <span class="comment"># 用非 贪婪模式 匹配 任意&lt;p&gt;标签</span></span><br><span class="line">		    BgnPartRex = re.compile(<span class="string">"&lt;p.*?&gt;"</span>)</span><br><span class="line">		    CharToNewLineRex = re.compile(<span class="string">"(&lt;br/&gt;|&lt;/p&gt;|&lt;tr&gt;|&lt;div&gt;|&lt;/div&gt;)"</span>)</span><br><span class="line">		    CharToNextTabRex = re.compile(<span class="string">"&lt;td&gt;"</span>)</span><br><span class="line">		</span><br><span class="line">		    <span class="comment"># 将一些html的符号实体转变为原始符号</span></span><br><span class="line">		    replaceTab = [(<span class="string">"&lt;"</span>, <span class="string">"&lt;"</span>), (<span class="string">"&gt;"</span>, <span class="string">"&gt;"</span>), (<span class="string">"&amp;"</span>, <span class="string">"&amp;"</span>), (<span class="string">"&amp;"</span>, <span class="string">"\""</span>), (<span class="string">" "</span>, <span class="string">" "</span>)]</span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">Replace_Char</span><span class="params">(self, x)</span>:</span></span><br><span class="line">		        x = self.BgnCharToNoneRex.sub(<span class="string">""</span>, x)</span><br><span class="line">		        x = self.BgnPartRex.sub(<span class="string">"\n    "</span>, x)</span><br><span class="line">		        x = self.CharToNewLineRex.sub(<span class="string">"\n"</span>, x)</span><br><span class="line">		        x = self.CharToNextTabRex.sub(<span class="string">"\t"</span>, x)</span><br><span class="line">		        x = self.EndCharToNoneRex.sub(<span class="string">""</span>, x)</span><br><span class="line">		</span><br><span class="line">		        <span class="keyword">for</span> t <span class="keyword">in</span> self.replaceTab:</span><br><span class="line">		            x = x.replace(t[<span class="number">0</span>], t[<span class="number">1</span>])</span><br><span class="line">		        <span class="keyword">return</span> x</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="class"><span class="keyword">class</span> <span class="title">Baidu_Spider</span>:</span></span><br><span class="line">		    <span class="comment"># 申明相关的属性</span></span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, url)</span>:</span></span><br><span class="line">		        self.myUrl = url + <span class="string">'?see_lz=1'</span></span><br><span class="line">		        self.datas = []</span><br><span class="line">		        self.myTool = HTML_Tool()</span><br><span class="line">		        <span class="keyword">print</span> <span class="string">u'已经启动百度贴吧爬虫，咔嚓咔嚓'</span></span><br><span class="line">		</span><br><span class="line">		        <span class="comment"># 初始化加载页面并将其转码储存</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">baidu_tieba</span><span class="params">(self)</span>:</span></span><br><span class="line">		        <span class="comment"># 读取页面的原始信息并将其从gbk转码</span></span><br><span class="line">		        myPage = urllib2.urlopen(self.myUrl).read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">		        <span class="comment"># 计算楼主发布内容一共有多少页</span></span><br><span class="line">		        endPage = self.page_counter(myPage)</span><br><span class="line">		        <span class="comment"># 获取该帖的标题</span></span><br><span class="line">		        title = self.find_title(myPage)</span><br><span class="line">		        <span class="keyword">print</span> <span class="string">u'文章名称：'</span> + title</span><br><span class="line">		        <span class="comment"># 获取最终的数据</span></span><br><span class="line">		        self.save_data(self.myUrl, title, endPage)</span><br><span class="line">		</span><br><span class="line">		        <span class="comment"># 用来计算一共有多少页</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">page_counter</span><span class="params">(self, myPage)</span>:</span></span><br><span class="line">		        <span class="comment"># 匹配 "共有&lt;span class="red"&gt;12&lt;/span&gt;页" 来获取一共有多少页</span></span><br><span class="line">		        myMatch = re.search(<span class="string">r'class="red"&gt;(\d+?)&lt;/span&gt;'</span>, myPage, re.S)</span><br><span class="line">		        <span class="keyword">if</span> myMatch:</span><br><span class="line">		            endPage = int(myMatch.group(<span class="number">1</span>))</span><br><span class="line">		            <span class="keyword">print</span> <span class="string">u'爬虫报告：发现楼主共有%d页的原创内容'</span> % endPage</span><br><span class="line">		        <span class="keyword">else</span>:</span><br><span class="line">		            endPage = <span class="number">0</span></span><br><span class="line">		            <span class="keyword">print</span> <span class="string">u'爬虫报告：无法计算楼主发布内容有多少页！'</span></span><br><span class="line">		        <span class="keyword">return</span> endPage</span><br><span class="line">		</span><br><span class="line">		        <span class="comment"># 用来寻找该帖的标题</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">find_title</span><span class="params">(self, myPage)</span>:</span></span><br><span class="line">		        <span class="comment"># 匹配 &lt;h1 class="core_title_txt" title=""&gt;xxxxxxxxxx&lt;/h1&gt; 找出标题</span></span><br><span class="line">		        myMatch = re.search(<span class="string">r'&lt;h1.*?&gt;(.*?)&lt;/h1&gt;'</span>, myPage, re.S)</span><br><span class="line">		        title = <span class="string">u'暂无标题'</span></span><br><span class="line">		        <span class="keyword">if</span> myMatch:</span><br><span class="line">		            title = myMatch.group(<span class="number">1</span>)</span><br><span class="line">		        <span class="keyword">else</span>:</span><br><span class="line">		            <span class="keyword">print</span> <span class="string">u'爬虫报告：无法加载文章标题！'</span></span><br><span class="line">		            <span class="comment"># 文件名不能包含以下字符： \ / ： * ? " &lt; &gt; |</span></span><br><span class="line">		        title = title.replace(<span class="string">'\\'</span>, <span class="string">''</span>).replace(<span class="string">'/'</span>, <span class="string">''</span>).replace(<span class="string">':'</span>, <span class="string">''</span>).replace(<span class="string">'*'</span>, <span class="string">''</span>).replace(<span class="string">'?'</span>, <span class="string">''</span>).replace(<span class="string">'"'</span>,</span><br><span class="line">		                                                                                                                    <span class="string">''</span>).replace(</span><br><span class="line">		            <span class="string">'&gt;'</span>, <span class="string">''</span>).replace(<span class="string">'&lt;'</span>, <span class="string">''</span>).replace(<span class="string">'|'</span>, <span class="string">''</span>)</span><br><span class="line">		        <span class="keyword">return</span> title</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		        <span class="comment"># 用来存储楼主发布的内容</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">save_data</span><span class="params">(self, url, title, endPage)</span>:</span></span><br><span class="line">		        <span class="comment"># 加载页面数据到数组中</span></span><br><span class="line">		        self.get_data(url, endPage)</span><br><span class="line">		        <span class="comment"># 打开本地文件</span></span><br><span class="line">		        f = open(title + <span class="string">'.txt'</span>, <span class="string">'w+'</span>)</span><br><span class="line">		        f.writelines(self.datas)</span><br><span class="line">		        f.close()</span><br><span class="line">		        <span class="keyword">print</span> <span class="string">u'爬虫报告：文件已下载到本地并打包成txt文件'</span></span><br><span class="line">		        <span class="keyword">print</span> <span class="string">u'请按任意键退出...'</span></span><br><span class="line">		        raw_input();</span><br><span class="line">		</span><br><span class="line">		        <span class="comment"># 获取页面源码并将其存储到数组中</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(self, url, endPage)</span>:</span></span><br><span class="line">		        url = url + <span class="string">'&amp;pn='</span></span><br><span class="line">		        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, endPage + <span class="number">1</span>):</span><br><span class="line">		            <span class="keyword">print</span> <span class="string">u'爬虫报告：爬虫%d号正在加载中...'</span> % i</span><br><span class="line">		            myPage = urllib2.urlopen(url + str(i)).read()</span><br><span class="line">		            <span class="comment"># 将myPage中的html代码处理并存储到datas里面</span></span><br><span class="line">		            self.deal_data(myPage.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		            <span class="comment"># 将内容从页面代码中抠出来</span></span><br><span class="line">		</span><br><span class="line">		    <span class="function"><span class="keyword">def</span> <span class="title">deal_data</span><span class="params">(self, myPage)</span>:</span></span><br><span class="line">		        myItems = re.findall(<span class="string">'id="post_content.*?&gt;(.*?)&lt;/div&gt;'</span>, myPage, re.S)</span><br><span class="line">		        <span class="keyword">for</span> item <span class="keyword">in</span> myItems:</span><br><span class="line">		            data = self.myTool.Replace_Char(item.replace(<span class="string">"\n"</span>, <span class="string">""</span>).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">		            self.datas.append(data + <span class="string">'\n'</span>)</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		            <span class="comment"># -------- 程序入口处 ------------------</span></span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">print</span> <span class="string">u"""#---------------------------------------</span></span><br><span class="line"><span class="string">		#   程序：百度贴吧爬虫</span></span><br><span class="line"><span class="string">		#   版本：1.0</span></span><br><span class="line"><span class="string">		#   作者：Jeff</span></span><br><span class="line"><span class="string">		#   日期：2016-10-18</span></span><br><span class="line"><span class="string">		#   语言：Python 2.7</span></span><br><span class="line"><span class="string">		#   操作：输入网址后自动只看楼主并保存到本地文件</span></span><br><span class="line"><span class="string">		#   功能：将楼主发布的内容打包txt存储到本地。</span></span><br><span class="line"><span class="string">		#---------------------------------------</span></span><br><span class="line"><span class="string">		"""</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">print</span> <span class="string">u'请输入贴吧的地址最后的数字串：'</span></span><br><span class="line">		bdurl = <span class="string">'http://tieba.baidu.com/p/'</span> + str(raw_input(<span class="string">u'http://tieba.baidu.com/p/'</span>))</span><br><span class="line">		</span><br><span class="line">		<span class="comment"># 调用</span></span><br><span class="line">		mySpider = Baidu_Spider(bdurl)</span><br><span class="line">		mySpider.baidu_tieba()</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/11/viewPager/" rel="next" title="利用viewPager制作轮播图">
+                <i class="fa fa-chevron-left"></i> 利用viewPager制作轮播图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/31/编写健壮的单元测试/" rel="prev" title="编写健壮的单元测试">
+                编写健壮的单元测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="何不梦一场">
+          <p class="site-author-name" itemprop="name">何不梦一场</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python爬虫入门"><span class="nav-number">1.</span> <span class="nav-text">python爬虫入门</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一个demo，糗事百科爬虫"><span class="nav-number">1.0.1.</span> <span class="nav-text">第一个demo，糗事百科爬虫</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">何不梦一场</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MImigSnFH2SHuyfEYpPMHFAF-gzGzoHsz", "7QaTmvnDKHHj4x4Xt6o6vC2J");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
