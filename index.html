@@ -406,7 +406,7 @@
       
         
           <h1 id="Spring-Transaction-Analysize"><a href="#Spring-Transaction-Analysize" class="headerlink" title="Spring Transaction Analysize"></a>Spring Transaction Analysize</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ol>
-<li>前言 <a href="https://nbxjf.github.io/2019/05/28/ognl版本问题分析/" target="_blank" rel="external">20190525-Mybatis OGNL导致的并发安全问题</a> ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2</li>
+<li>前言 <a href="https://nbxjf.github.io/2019/05/28/ognl版本问题分析/" target="_blank" rel="noopener">20190525-Mybatis OGNL导致的并发安全问题</a> ，发生问题的mybatis版本为3.2.7，mybatis-spring的版本为1.2.2</li>
 <li>为解决OGNL的并发问题，将mybatis升级是3.4.0版本，mybatis-spring升级至1.3.0版本，但是此时发现稳定报错<code>Transaction time out</code><img src="../img/Spring事务问题分析_img/timeout@2x.png" alt></li>
 </ol>
           <!--noindex-->
@@ -566,7 +566,7 @@
       
         
           <h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>在查询sql的时候遇到报错：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.builder.BuilderException: Error evaluating expression 'groupStatusList != null and groupStatusList.size() &gt; 0'. Cause: org.apache.ibatis.ognl.MethodFailedException: Method "size" failed for object [0] [java.lang.IllegalAccessException: Class org.apache.ibatis.ognl.OgnlRuntime can not access a member of class com.google.common.primitives.Ints$IntArrayAsList with modifiers "public"] |</div><div class="line">	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:75) |</div><div class="line">	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:371) |</div><div class="line">	at com.sun.proxy.$Proxy42.selectList(Unknown Source) |</div><div class="line">	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:198) |</div><div class="line">	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:119) |</div><div class="line">	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:63) |</div><div class="line">	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:52) |</div><div class="line">	at com.sun.proxy.$Proxy62.getGroupIdByUserIdAndGroupStatus(Unknown Source) |</div><div class="line">	at com.yit.groupbuy.service.GroupBuyInnerServiceImpl.queryProcessingGroupsByUserId(GroupBuyInnerServiceImpl.java:606) |</div><div class="line">	at com.alibaba.dubbo.common.bytecode.Wrapper22.invokeMethod(Wrapper22.java) |</div><div class="line"> api undesigned exception.</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.builder.BuilderException: Error evaluating expression 'groupStatusList != null and groupStatusList.size() &gt; 0'. Cause: org.apache.ibatis.ognl.MethodFailedException: Method "size" failed for object [0] [java.lang.IllegalAccessException: Class org.apache.ibatis.ognl.OgnlRuntime can not access a member of class com.google.common.primitives.Ints$IntArrayAsList with modifiers "public"] |</span><br><span class="line">	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:75) |</span><br><span class="line">	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:371) |</span><br><span class="line">	at com.sun.proxy.$Proxy42.selectList(Unknown Source) |</span><br><span class="line">	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:198) |</span><br><span class="line">	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:119) |</span><br><span class="line">	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:63) |</span><br><span class="line">	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:52) |</span><br><span class="line">	at com.sun.proxy.$Proxy62.getGroupIdByUserIdAndGroupStatus(Unknown Source) |</span><br><span class="line">	at com.yit.groupbuy.service.GroupBuyInnerServiceImpl.queryProcessingGroupsByUserId(GroupBuyInnerServiceImpl.java:606) |</span><br><span class="line">	at com.alibaba.dubbo.common.bytecode.Wrapper22.invokeMethod(Wrapper22.java) |</span><br><span class="line"> api undesigned exception.</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/28/ognl版本问题分析/#more" rel="contents">
@@ -712,198 +712,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2019/02/28/java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="何不梦一场">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="何不梦一场的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/28/java/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T21:15:35+08:00">
-                2019-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/28/java/" class="leancloud_visitors" data-flag-title>
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul>
-<li>许吉发</li>
-<li>男 / 25岁</li>
-<li>手机：159 2175 4057</li>
-<li>Email：<a href="mailto:jeff199504@gmail.com" target="_blank" rel="noopener">jeff199504@gmail.com</a> </li>
-<li>QQ/微信号：326369465（同微信）</li>
-<li>本科/宁波工程学院/计算机科学与技术专业/2017届</li>
-</ul>
-<h1 id="求职方向"><a href="#求职方向" class="headerlink" title="求职方向"></a>求职方向</h1><p>​    应聘岗位： Java开发工程师</p>
-<p>​    所属行业： 互联网/电子商务</p>
-<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h2 id="一条（2017-7-至今）"><a href="#一条（2017-7-至今）" class="headerlink" title="一条（2017.7 - 至今）"></a>一条（2017.7 - 至今）</h2><ul>
-<li><p>公司：上海一条网络科技有限公司</p>
-</li>
-<li><p>地点：上海</p>
-</li>
-<li><p>所属行业：互联网/电子商务</p>
-</li>
-<li><p>岗位：Java工程师</p>
-</li>
-<li><p>主要工作：</p>
-<p>参与公司从零到一微服务建设，进行面向C端的Dubbo微服务系统开发。</p>
-<p>期间我主要负责一条平台各大营销活动子系统设计开发、订单系统及优惠券系统重构、退换货售后平台设计开发、开放平台建设与开放平台网关修改、并完成对一条用户、内部用户、各子系统用户的权限中心化管理等工作。</p>
-</li>
-</ul>
-<h2 id="主要项目经历"><a href="#主要项目经历" class="headerlink" title="主要项目经历"></a>主要项目经历</h2><h3 id="活动系统"><a href="#活动系统" class="headerlink" title="活动系统"></a>活动系统</h3><ul>
-<li>负责活动营销中台的设计开发工作，主要包含拼团、预售、阶梯团、秒杀、满减满赠、免费试用、拍卖、众筹、砍价等营销系统的创建、提报流程、及最终订单生效，并与供应商、订单、商品、价格、库存、结算等系统进行数据交互、提供下单运行时依赖。</li>
-<li>开发TCC解决分布式事务数据的最终一致性问题；对活动进行了统一降维计算(Redis二方包)解决活动冲突问题；开发Kafka延时事务消息保障数据二阶段提交；应用多级缓存（Redis,OcsCache,Guava Cache）、分布式锁等处理高并发问题。</li>
-<li>为双十一活动的流畅运行提供了强有力的支持，并已经覆盖全平台所有的活动。</li>
-</ul>
-<h3 id="订单及优惠券系统重构"><a href="#订单及优惠券系统重构" class="headerlink" title="订单及优惠券系统重构"></a>订单及优惠券系统重构</h3><ul>
-<li>不同于淘宝的平行优惠，一条应用的是阶梯优惠</li>
-<li>我主要负责标准化折扣spi实体，定制新的优惠计算链路处理VIP、积分、优惠券、活动折扣及商家折扣，重写折扣分摊算法，并完成各系统的处理逻辑。并使用DDD思想重新设计重构优惠券领券、消费流程，消除原系统中的大量存在的贫血、单一无用的值实体。</li>
-</ul>
-<h3 id="拼团-众筹-拍卖等营销子系统"><a href="#拼团-众筹-拍卖等营销子系统" class="headerlink" title="拼团/众筹/拍卖等营销子系统"></a>拼团/众筹/拍卖等营销子系统</h3><ul>
-<li>负责设计并开发拼团、众筹、拍卖、砍价、预售、秒杀等营销系统，并进行多次重构。</li>
-<li>现拼团最高日订单已超过50W单、拍卖单场最高成交额突破1200W，秒杀已成为日常营销工具。</li>
-<li>这些营销子系统本身都是一个单独的面向C端的应用级服务，是为特定的业务及营销场景设定的。各自的业务本身并不复杂，但是作为营销类系统，还是遇到了缓存、高并发、分布式事务等各种问题，解决这些问题同样给我带来了很大提升，同时促进我学习了电商平台常用的各大营销方式。</li>
-</ul>
-<h3 id="退换货售后服务"><a href="#退换货售后服务" class="headerlink" title="退换货售后服务"></a>退换货售后服务</h3><ul>
-<li>负责一条售后系统的设计开发工作，在系统中引入有限状态机流程，改造有限状态机 squirrel-foundation，并完成与spring的整合，应用责任链模型定义符合业务的退货、换货、补货、赔偿等流程，并完成各节点不同业务需求。</li>
-</ul>
-<h3 id="开放平台"><a href="#开放平台" class="headerlink" title="开放平台"></a>开放平台</h3><ul>
-<li>因为第三方供应商的开发对接需求，参与修改开放平台网关，开发第三方开放平台的设计开发工作。</li>
-<li>期间主要负责开放平台搭建，相关功能的修改工作，采用rsa非对称性加密算法生成_tpid，使用zookeeper管理户权限，修改完成业务签名以及验签问题等。</li>
-<li>上线后功能良好，并完成与京东物流、京东开普勒、京东宙斯等三方平台对接。 </li>
-</ul>
-<h1 id="实习经历"><a href="#实习经历" class="headerlink" title="实习经历"></a>实习经历</h1><h2 id="东方融资网-东融数据（2016-9-2017-5）"><a href="#东方融资网-东融数据（2016-9-2017-5）" class="headerlink" title="东方融资网-东融数据（2016.9-2017.5）"></a>东方融资网-东融数据（2016.9-2017.5）</h2><ul>
-<li>岗位：ETL与API开发实习生</li>
-<li>开发语言：Python</li>
-<li>参与并完成了东融数据相关板块百万数据的爬取、抽取及转换工作，成功完成中国近千万的工商数据的获取，接入ElasticSearch，并提供数据获取统一API。</li>
-<li>了解了ETL数据仓库技术、爬虫与反爬虫技术等。</li>
-</ul>
-<h1 id="校园经历"><a href="#校园经历" class="headerlink" title="校园经历"></a>校园经历</h1><ul>
-<li>CET六级</li>
-<li>gpa专业前5%</li>
-<li>获浙江省优秀毕业生，浙江省政府奖学金等</li>
-<li>2016年全国信息安全竞赛三等奖</li>
-</ul>
-<h1 id="自我评价"><a href="#自我评价" class="headerlink" title="自我评价"></a>自我评价</h1><p>3年电商系统开发经验，熟悉电商系统各类营销活动，熟悉电商C端业务。</p>
-<p>Java基础扎实，熟悉Dubbo、SpringCloud微服务开发，熟悉Spring、SpringBoot、Mybatis等项目构成的主流框架，了解它们的实现原理。了解Redis、Zookeeper等常见中间件。</p>
-<p>热爱学习，自控能力强，勇于担当，有较强的抗压能力。我相信：人生如棋，我愿为卒，动作虽慢，可谁见我会后退一步。</p>
-<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>感谢您花时间阅读我的简历，期待能有机会和您共事。</p>
-
-          
         
       
     </div>
@@ -1872,6 +1680,167 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nbxjf.github.com/2017/08/31/编写健壮的单元测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="何不梦一场">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="何不梦一场的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/31/编写健壮的单元测试/" itemprop="url">编写健壮的单元测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T13:57:20+08:00">
+                2017-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/单元测试/" itemprop="url" rel="index">
+                    <span itemprop="name">单元测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/31/编写健壮的单元测试/" class="leancloud_visitors" data-flag-title="编写健壮的单元测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文包括以下内容：</p>
+<ul>
+<li>如何解决数据依赖，编写健壮的单元测试</li>
+<li>如何处理异常分支和边界场景</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/31/编写健壮的单元测试/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1922,7 +1891,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -413,32 +413,32 @@
 <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>网上的教程多是基于下载jdk然后上传至服务器安装的，那么如何在线安装jdk呢？</p>
 <ul>
 <li><p>oracle官方未提供jdk镜像地址，默认apt-get是无法安装jdk8的，需要额外设置jdk镜像源</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install software-properties-common</div><div class="line">sudo add-apt-repository ppa:webupd8team/java</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install -y oracle-java8-installer</div><div class="line">sudo apt-get install -y oracle-java8-set-default</div><div class="line">sudo update-alternatives --config java</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y oracle-java8-installer</span><br><span class="line">sudo apt-get install -y oracle-java8-set-default</span><br><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
 <p>  <br></p>
 </li>
 <li>参考：<ul>
-<li><a href="https://askubuntu.com/questions/593433/error-sudo-add-apt-repository-command-not-found" target="_blank" rel="external">添加Oracle镜像</a></li>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get" target="_blank" rel="external">安装</a></li>
+<li><a href="https://askubuntu.com/questions/593433/error-sudo-add-apt-repository-command-not-found" target="_blank" rel="noopener">添加Oracle镜像</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get" target="_blank" rel="noopener">安装</a></li>
 </ul>
 </li>
 </ul>
 <h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><ul>
 <li><p>在线安装</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-client</div><div class="line">apt install mysql-client</div><div class="line">apt install libmysqlclient-dev</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-client</span><br><span class="line">apt install mysql-client</span><br><span class="line">apt install libmysqlclient-dev</span><br></pre></td></tr></table></figure>
 <ul>
 <li>期间需两次输入root密码</li>
 </ul>
 </li>
 <li><p>查看是否安装成功</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -tap | grep mysql</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tap | grep mysql</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>开启远程访问</p>
 <ul>
 <li><p>注释<code>bind-address = 127.0.0.1</code></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>进入账户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div><div class="line">grant all on *.* to XXX@&apos;%&apos; identified by &apos;XXX&apos;;</div><div class="line">flush privileges;</div><div class="line">exit;</div><div class="line">/etc/init.d/mysql restart</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">grant all on *.* to XXX@&apos;%&apos; identified by &apos;XXX&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">exit;</span><br><span class="line">/etc/init.d/mysql restart</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><br></p>
@@ -454,34 +454,34 @@
 </ul>
 <h1 id="Ftp"><a href="#Ftp" class="headerlink" title="Ftp"></a>Ftp</h1><ul>
 <li><p>安装ftp</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">   apt-get install vsftpd -y</div><div class="line">apt-get install ftp</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   apt-get install vsftpd -y</span><br><span class="line">apt-get install ftp</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改配置文件</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/vsftpd/vsftpd.conf</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
 <p>  修改如下内容：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">local_enable=YES </div><div class="line">write_enable=YES </div><div class="line">chroot_local_user=YES</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES </span><br><span class="line">write_enable=YES </span><br><span class="line">chroot_local_user=YES</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>开启</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd start</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>连接ftp</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sftp root@ip</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp root@ip</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><ul>
 <li><p>安装git</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><ul>
 <li><p>安装maven</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install maven</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install maven</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看版本</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -version</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -version</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="打包工程"><a href="#打包工程" class="headerlink" title="打包工程"></a>打包工程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn install</div></pre></td></tr></table></figure>
+<h1 id="打包工程"><a href="#打包工程" class="headerlink" title="打包工程"></a>打包工程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -603,7 +603,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
